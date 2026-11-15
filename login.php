@@ -1,5 +1,6 @@
 <?php
 include "koneksi.php";
+session_start();
 $user_ada = true;
 $passwd_benar = true;
 if (isset($_POST["login"])) {
