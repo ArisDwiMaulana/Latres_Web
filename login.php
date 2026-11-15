@@ -1,5 +1,7 @@
 <?php
 include "koneksi.php";
+$user_ada = true;
+$passwd_benar = true;
 if (isset($_POST["login"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -22,14 +24,10 @@ if (isset($_POST["login"])) {
             header("location: dashboard.php");
             exit();
         } else {
-            echo "<div class='alert theme-danger' role='alert'>
-              <p>Password salah</p>
-            </div>";
+            $passwd_benar = false;
         }
     } else {
-        echo "<div class='alert theme-danger' role='alert'>
-          <p>Username tidak ada</p>
-        </div>";
+        $user_ada = false;
     }
 }
 ?>
@@ -48,6 +46,18 @@ if (isset($_POST["login"])) {
         <div class="w-25 shadow-xl shadow-black p-5 bg-body rounded">
             <h3><center>Login</center></h3>
             <form action="" method="POST">
+                <?php
+                    if (!$user_ada) {
+                        echo "<div class='alert theme-danger my-3' role='alert'>
+                                <p>Username tidak ada</p>
+                              </div>";
+                    }
+                    if (!$passwd_benar) {
+                        echo "<div class='alert theme-danger my-3' role='alert'>
+                                <p>Password salah</p>
+                              </div>";
+                    }
+                ?>
               <div class="mb-4">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username">
